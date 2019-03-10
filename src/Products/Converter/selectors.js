@@ -9,10 +9,9 @@ const selectConverterDomain = state => state.get('converter', initialState);
 /**
  * select rates
  */
-const selectRates = () =>
-  createSelector(
-    selectConverterDomain,
-    substate => substate.get('rates').toJS()
-  );
+const selectRates = createSelector(
+  selectConverterDomain,
+  substate => substate.get('rates').toJS()
+);
 
 export { selectConverterDomain, selectRates };

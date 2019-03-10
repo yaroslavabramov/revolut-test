@@ -1,7 +1,11 @@
-import { SUBSCRIBE_DATA, UPDATE_RATES } from './constants';
+import { SUBSCRIBE_DATA, UPDATE_RATES, CANCEL_SUBSCRIBE } from './constants';
 
 const subscribeData = () => ({
   type: SUBSCRIBE_DATA
+});
+
+const cancelSubscribe = () => ({
+  type: CANCEL_SUBSCRIBE
 });
 
 const updateRates = rates => ({
@@ -9,4 +13,4 @@ const updateRates = rates => ({
   rates
 });
 
-export { subscribeData, updateRates };
+export { subscribeData, cancelSubscribe, updateRates };

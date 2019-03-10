@@ -1,24 +1,49 @@
-import { all, call, delay, put, takeEvery } from 'redux-saga/effects';
-import { SUBSCRIBE_DATA } from './constants';
+import {
+  all,
+  call,
+  delay,
+  put,
+  takeEvery,
+  race,
+  take
+} from 'redux-saga/effects';
+import { SUBSCRIBE_DATA, CANCEL_SUBSCRIBE } from './constants';
 import { updateRates } from './actions';
 
-const sendRequest = () => {
-  return fetch(
-    'https://openexchangerates.org/api/latest.json?app_id=bb16478b4da442c99aafe75fd3d13158'
-  ).then(response => response.json());
+const getRates = async () => {
+  try {
+    const response = await fetch(
+      'https://openexchangerates.org/api/latest.json?app_id=bb16478b4da442c99aafe75fd3d13158'
+    );
+    if (response.ok) return response.json();
+    else throw new Error('response is not ok');
+  } catch (e) {
+    throw new Error(e);
+  }
 };
 
 export function* fetchRates() {
-  const { rates } = yield sendRequest();
-  yield put(updateRates(rates));
+  try {
+    const { rates } = yield getRates();
+    yield put(updateRates(rates));
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export function* startSubscribe() {
   while (true) {
-    yield all([delay(10000), call(fetchRates)]);
+    yield all([delay(3000), call(fetchRates)]);
   }
 }
 
+export function* subscribeData() {
+  yield race({
+    subscribe: call(startSubscribe),
+    cancel: take(CANCEL_SUBSCRIBE)
+  });
+}
+
 export default function* converterSaga() {
-  yield takeEvery(SUBSCRIBE_DATA, startSubscribe);
+  yield takeEvery(SUBSCRIBE_DATA, subscribeData);
 }

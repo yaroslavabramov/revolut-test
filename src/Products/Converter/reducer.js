@@ -8,7 +8,12 @@ import { fromJS } from 'immutable';
 import { SET_USD, UPDATE_RATES } from './constants';
 
 export const initialState = fromJS({
-  usd: 0
+  usd: 0,
+  rates: {
+    USD: 1,
+    EUR: 2,
+    GBP: 2.5
+  }
 });
 
 const converterReducer = (state = initialState, action) => {
@@ -16,7 +21,7 @@ const converterReducer = (state = initialState, action) => {
     case SET_USD:
       return state.set('usd', action.value);
     case UPDATE_RATES:
-      return state.set('rates', fromJS(action.rates));
+      return state.set('rates', fromJS({ ...action.rates, USD: 1 }));
     default:
       return state;
   }
