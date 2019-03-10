@@ -19,7 +19,7 @@ const store = createStore(
   reducers,
   composeEnhancers(applyMiddleware(sagaMiddleware))
 );
-
+sagaMiddleware.run(rootSaga);
 /**
  * Root component for wrap application with store
  */

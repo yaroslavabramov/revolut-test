@@ -1,5 +1,8 @@
+import { all } from 'redux-saga/effects';
+import converterSaga from './Products/Converter/saga';
+
 function* rootSaga() {
-  while (true) {}
+  yield all([converterSaga()]);
 }
 
 export default rootSaga;
