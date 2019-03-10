@@ -13,5 +13,24 @@ const selectRates = createSelector(
   selectConverterDomain,
   substate => substate.get('rates').toJS()
 );
+/**
+ * select convertFrom data
+ */
+const selectConvertFrom = createSelector(
+  selectConverterDomain,
+  substate => substate.get('convertFrom').toJS()
+);
+/**
+ * select convertFrom data
+ */
+const selectConvertFromInput = createSelector(
+  selectConvertFrom,
+  ({ input }) => input
+);
 
-export { selectConverterDomain, selectRates };
+export {
+  selectConverterDomain,
+  selectRates,
+  selectConvertFrom,
+  selectConvertFromInput
+};

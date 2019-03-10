@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { selectRates } from './selectors';
 import { subscribeData, cancelSubscribe } from './actions';
+import ConvertFrom from './ConvertFrom';
 
 /**
  *
@@ -28,6 +29,8 @@ const Converter = ({ rates, startSubscribe, endSubscribe }) => {
       {rates.EUR}
       <br />
       {rates.GBP}
+      <br />
+      <ConvertFrom />
     </div>
   );
 };
