@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
 import { selectRates } from './selectors';
 import { subscribeData, cancelSubscribe } from './actions';
 
@@ -10,7 +11,7 @@ import { subscribeData, cancelSubscribe } from './actions';
  */
 const Converter = ({ rates, startSubscribe, endSubscribe }) => {
   /**
-   * managing subscribe for rates
+   * manage rates subscription
    */
   useEffect(() => {
     startSubscribe();
@@ -34,6 +35,7 @@ const Converter = ({ rates, startSubscribe, endSubscribe }) => {
 const mapStateToProps = createStructuredSelector({
   rates: selectRates
 });
+
 const mapDispatchToProps = dispatch => ({
   startSubscribe: () => {
     console.log('start');

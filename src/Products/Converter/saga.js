@@ -13,7 +13,7 @@ import { updateRates } from './actions';
 const getRates = async () => {
   try {
     const response = await fetch(
-      'https://openexchangerates.org/api/latest.json?app_id=bb16478b4da442c99aafe75fd3d13158'
+      'https://openexchangerates.org/api/latest.json?app_id=bb16478b4da442c99aafe75fd3d13158e'
     );
     if (response.ok) return response.json();
     else throw new Error('response is not ok');
@@ -24,8 +24,10 @@ const getRates = async () => {
 
 export function* fetchRates() {
   try {
-    const { rates } = yield getRates();
-    yield put(updateRates(rates));
+    const {
+      rates: { GBP, EUR }
+    } = yield getRates();
+    yield put(updateRates({ GBP, EUR }));
   } catch (e) {
     console.error(e);
   }
@@ -33,7 +35,7 @@ export function* fetchRates() {
 
 export function* startSubscribe() {
   while (true) {
-    yield all([delay(3000), call(fetchRates)]);
+    yield all([delay(100000), call(fetchRates)]);
   }
 }
 
