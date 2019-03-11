@@ -16,21 +16,71 @@ const selectRates = createSelector(
 /**
  * select convertFrom data
  */
-const selectConvertFrom = createSelector(
+const selectFrom = createSelector(
   selectConverterDomain,
-  substate => substate.get('convertFrom').toJS()
+  substate => substate.get('from').toJS()
 );
 /**
- * select convertFrom data
+ * select convertFrom value
  */
-const selectConvertFromInput = createSelector(
-  selectConvertFrom,
-  ({ input }) => input
+const selectFromValue = createSelector(
+  selectFrom,
+  ({ value }) => value
+);
+/**
+ * select convertFrom currency
+ */
+const selectFromCurr = createSelector(
+  selectFrom,
+  ({ currency }) => currency
+);
+/**
+ * select convertTodata
+ */
+const selectTo = createSelector(
+  selectConverterDomain,
+  substate => substate.get('to').toJS()
+);
+/**
+ * select convertTo value
+ */
+const selectToValue = createSelector(
+  selectTo,
+  ({ value }) => value
+);
+/**
+ * select convertTo currency
+ */
+const selectToCurr = createSelector(
+  selectTo,
+  ({ currency }) => currency
+);
+/**
+ * select coefficient between currencies
+ */
+const selectCoef = createSelector(
+  selectFromCurr,
+  selectToCurr,
+  selectRates,
+  (from, to, rates) => +rates[from] / +rates[to]
+);
+/**
+ * select active field
+ */
+const selectActiveField = createSelector(
+  selectConverterDomain,
+  substate => substate.get('activeField')
 );
 
 export {
   selectConverterDomain,
   selectRates,
-  selectConvertFrom,
-  selectConvertFromInput
+  selectFrom,
+  selectFromValue,
+  selectFromCurr,
+  selectCoef,
+  selectTo,
+  selectToValue,
+  selectToCurr,
+  selectActiveField
 };

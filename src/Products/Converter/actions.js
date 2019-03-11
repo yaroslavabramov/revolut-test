@@ -2,7 +2,9 @@ import {
   SUBSCRIBE_DATA,
   UPDATE_RATES,
   CANCEL_SUBSCRIBE,
-  UPDATE_INPUT
+  UPDATE_FIELD_VALUE,
+  UPDATE_CURRENCY,
+  UPDATE_VALUE_FROM_INPUT
 } from './constants';
 
 const subscribeData = () => ({
@@ -18,10 +20,29 @@ const updateRates = rates => ({
   rates
 });
 
-const updateInput = (field, value) => ({
-  type: UPDATE_INPUT,
+const updateFieldValue = (field, value) => ({
+  type: UPDATE_FIELD_VALUE,
   field,
   value
 });
 
-export { subscribeData, cancelSubscribe, updateRates, updateInput };
+const updateCurrency = (field, value) => ({
+  type: UPDATE_CURRENCY,
+  value,
+  field
+});
+
+const updateValueFromInput = (field, value) => ({
+  type: UPDATE_VALUE_FROM_INPUT,
+  field,
+  value
+});
+
+export {
+  subscribeData,
+  cancelSubscribe,
+  updateRates,
+  updateFieldValue,
+  updateCurrency,
+  updateValueFromInput
+};

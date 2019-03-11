@@ -5,7 +5,13 @@
  */
 
 import { fromJS } from 'immutable';
-import { SET_USD, UPDATE_RATES, UPDATE_INPUT } from './constants';
+import {
+  SET_USD,
+  UPDATE_RATES,
+  UPDATE_FIELD_VALUE,
+  UPDATE_CURRENCY,
+  UPDATE_VALUE_FROM_INPUT
+} from './constants';
 
 export const initialState = fromJS({
   usd: 0,
@@ -14,20 +20,15 @@ export const initialState = fromJS({
     EUR: 2,
     GBP: 2.5
   },
-  convertFrom: {
-    input: {
-      value: '',
-      error: false
-    },
+  from: {
+    value: '',
     currency: 'USD'
   },
-  convertTo: {
-    input: {
-      value: '',
-      error: false
-    },
+  to: {
+    value: '',
     currency: 'USD'
-  }
+  },
+  activeField: 'to'
 });
 
 const converterReducer = (state = initialState, action) => {
@@ -36,10 +37,14 @@ const converterReducer = (state = initialState, action) => {
       return state.set('usd', action.value);
     case UPDATE_RATES:
       return state.set('rates', fromJS({ ...action.rates, USD: 1 }));
-    case UPDATE_INPUT:
+    case UPDATE_FIELD_VALUE:
+      return state.setIn([action.field, 'value'], action.value);
+    case UPDATE_VALUE_FROM_INPUT:
       return state
-        .setIn([action.field, 'input', 'value'], action.value)
-        .setIn([action.field, 'input', 'error'], false);
+        .setIn([action.field, 'value'], action.value)
+        .set('activeField', action.field);
+    case UPDATE_CURRENCY:
+      return state.setIn([action.field, 'currency'], action.value);
     default:
       return state;
   }

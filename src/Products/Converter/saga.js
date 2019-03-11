@@ -4,11 +4,24 @@ import {
   delay,
   put,
   takeEvery,
+  takeLatest,
   race,
-  take
+  take,
+  select
 } from 'redux-saga/effects';
-import { SUBSCRIBE_DATA, CANCEL_SUBSCRIBE } from './constants';
-import { updateRates } from './actions';
+import {
+  SUBSCRIBE_DATA,
+  CANCEL_SUBSCRIBE,
+  UPDATE_CURRENCY,
+  UPDATE_VALUE_FROM_INPUT
+} from './constants';
+import { updateRates, updateFieldValue } from './actions';
+import {
+  selectActiveField,
+  selectCoef,
+  selectFromValue,
+  selectToValue
+} from './selectors';
 
 const getRates = async () => {
   try {
@@ -46,6 +59,28 @@ export function* subscribeData() {
   });
 }
 
+export function* recountValues() {
+  const activeField = yield select(selectActiveField);
+  const coefficient = yield select(selectCoef);
+  const changeField = activeField === 'from' ? 'to' : 'from';
+  let resultValue;
+  if (activeField === 'from') {
+    const valueFrom = yield select(selectFromValue);
+    resultValue = valueFrom ? valueFrom * coefficient : '';
+  } else {
+    const valueTo = yield select(selectToValue);
+    resultValue = valueTo ? valueTo / coefficient : '';
+  }
+  yield put(updateFieldValue(changeField, resultValue));
+}
+
+export function* debouncedRecountValues() {
+  yield delay(100);
+  yield call(recountValues);
+}
+
 export default function* converterSaga() {
   yield takeEvery(SUBSCRIBE_DATA, subscribeData);
+  yield takeEvery(UPDATE_CURRENCY, recountValues);
+  yield takeLatest(UPDATE_VALUE_FROM_INPUT, debouncedRecountValues);
 }

@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { createStructuredSelector } from 'reselect';
-import { selectFromValue } from './selectors';
+import { selectToValue } from './selectors';
 import { updateValueFromInput } from './actions';
 
-const ConvertFrom = ({ value, handleInputChange }) => {
+const ConvertTo = ({ value, handleInputChange }) => {
   return (
     <section>
       <TextField
-        label="Convert From"
-        type="number"
+        label="Convert To"
         onChange={handleInputChange}
         value={value}
       />
@@ -19,7 +18,7 @@ const ConvertFrom = ({ value, handleInputChange }) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-  value: selectFromValue
+  value: selectToValue
 });
 
 const reg = /^-?\d*\.?\d*$/;
@@ -28,7 +27,7 @@ const mapDispatchToProps = dispatch => ({
   handleInputChange: e => {
     const { value } = e.target;
     if (reg.test(value)) {
-      dispatch(updateValueFromInput('from', value));
+      dispatch(updateValueFromInput('to', value));
     }
   }
 });
@@ -36,4 +35,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ConvertFrom);
+)(ConvertTo);
