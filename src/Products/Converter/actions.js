@@ -1,37 +1,52 @@
 import {
-  SUBSCRIBE_DATA,
+  SUBSCRIBE_RATES,
   UPDATE_RATES,
-  CANCEL_SUBSCRIBE,
+  CANCEL_SUBSCRIPTION,
   UPDATE_FIELD_VALUE,
   UPDATE_CURRENCY,
   UPDATE_VALUE_FROM_INPUT
 } from './constants';
 
-const subscribeData = () => ({
-  type: SUBSCRIBE_DATA
+/**
+ * subscribe rates data
+ */
+const subscribeRates = () => ({
+  type: SUBSCRIBE_RATES
 });
 
-const cancelSubscribe = () => ({
-  type: CANCEL_SUBSCRIBE
+const cancelSubscription = () => ({
+  type: CANCEL_SUBSCRIPTION
 });
 
 const updateRates = rates => ({
   type: UPDATE_RATES,
   rates
 });
-
+/**
+ * update value for one of fields
+ * @param {String} field
+ * @param {String} value
+ */
 const updateFieldValue = (field, value) => ({
   type: UPDATE_FIELD_VALUE,
   field,
   value
 });
-
+/**
+ * update currency for one of fields
+ * @param {String} field
+ * @param {String} value
+ */
 const updateCurrency = (field, value) => ({
   type: UPDATE_CURRENCY,
   value,
   field
 });
-
+/**
+ * update value from input fields
+ * @param {String} field
+ * @param {String} value
+ */
 const updateValueFromInput = (field, value) => ({
   type: UPDATE_VALUE_FROM_INPUT,
   field,
@@ -39,8 +54,8 @@ const updateValueFromInput = (field, value) => ({
 });
 
 export {
-  subscribeData,
-  cancelSubscribe,
+  subscribeRates,
+  cancelSubscription,
   updateRates,
   updateFieldValue,
   updateCurrency,

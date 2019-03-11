@@ -26,7 +26,7 @@ export const initialState = fromJS({
   },
   to: {
     value: '',
-    currency: 'USD'
+    currency: 'GBP'
   },
   activeField: 'to'
 });

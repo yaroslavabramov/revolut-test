@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { selectRates } from './selectors';
-import { subscribeData, cancelSubscribe } from './actions';
+import { subscribeRates, cancelSubscription } from './actions';
 import ConvertFrom from './ConvertFrom';
 import ConvertTo from './ConvertTo';
 
 /**
- *
+ * UI with converter
  */
 const Converter = ({ rates, startSubscribe, endSubscribe }) => {
   /**
@@ -43,11 +43,10 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   startSubscribe: () => {
-    console.log('start');
-    dispatch(subscribeData());
+    dispatch(subscribeRates());
   },
   endSubscribe: () => {
-    dispatch(cancelSubscribe());
+    dispatch(cancelSubscription());
   }
 });
 
