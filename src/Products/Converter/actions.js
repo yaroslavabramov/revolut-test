@@ -3,7 +3,7 @@ import {
   UPDATE_RATES,
   CANCEL_SUBSCRIPTION,
   UPDATE_FIELD_VALUE,
-  UPDATE_CURRENCY,
+  UPDATE_FIELD_CURRENCY,
   UPDATE_VALUE_FROM_INPUT
 } from './constants';
 
@@ -35,11 +35,11 @@ const updateFieldValue = (field, value) => ({
 /**
  * update currency for one of fields
  * @param {String} field
- * @param {String} value
+ * @param {String} currency
  */
-const updateCurrency = (field, value) => ({
-  type: UPDATE_CURRENCY,
-  value,
+const updateFieldCurrency = (field, currency) => ({
+  type: UPDATE_FIELD_CURRENCY,
+  currency,
   field
 });
 /**
@@ -58,6 +58,6 @@ export {
   cancelSubscription,
   updateRates,
   updateFieldValue,
-  updateCurrency,
+  updateFieldCurrency,
   updateValueFromInput
 };

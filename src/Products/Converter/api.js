@@ -3,7 +3,7 @@ const getRates = async () => {
     const response = await fetch(
       'https://openexchangerates.org/api/latest.json?app_id=bb16478b4da442c99aafe75fd3d13158e'
     );
-    if (response.ok) return response.json();
+    if (response.ok) return await response.json();
     else throw new Error('response is not ok');
   } catch (e) {
     throw new Error(e);

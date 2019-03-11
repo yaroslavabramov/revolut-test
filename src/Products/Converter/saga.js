@@ -12,7 +12,7 @@ import {
 import {
   SUBSCRIBE_RATES,
   CANCEL_SUBSCRIPTION,
-  UPDATE_CURRENCY,
+  UPDATE_FIELD_CURRENCY,
   UPDATE_VALUE_FROM_INPUT,
   UPDATE_RATES
 } from './constants';
@@ -35,7 +35,7 @@ export function* fetchRates() {
     } = yield getRates();
     yield put(updateRates({ GBP, EUR }));
   } catch (e) {
-    console.error(e);
+    yield call(console.error, e);
   }
 }
 /**
@@ -86,10 +86,10 @@ export function* debouncedRecountValues() {
   yield call(recountValues);
 }
 /**
- * converter UI whatchers
+ * converter UI listeners
  */
 export default function* converterSaga() {
   yield takeEvery(SUBSCRIBE_RATES, subscribeRates);
-  yield takeEvery([UPDATE_CURRENCY, UPDATE_RATES], recountValues);
+  yield takeEvery([UPDATE_FIELD_CURRENCY, UPDATE_RATES], recountValues);
   yield takeEvery(UPDATE_VALUE_FROM_INPUT, debouncedRecountValues);
 }

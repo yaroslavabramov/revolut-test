@@ -45,5 +45,8 @@
       "prettier --single-quote --write",
       "git add"
     ]
+  },
+  "devDependencies": {
+    "jest-cli": "23.6.0"
   }
 }
