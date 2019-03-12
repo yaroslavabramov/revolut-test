@@ -18,16 +18,17 @@ import {
 export const initialState = fromJS({
   rates: {
     USD: 1,
-    EUR: 2,
-    GBP: 2.5
+    EUR: 1,
+    GBP: 1
   },
+  loading: true,
   from: {
     value: '',
     currency: 'USD'
   },
   to: {
     value: '',
-    currency: 'GBP'
+    currency: 'USD'
   },
   activeField: 'to',
   dialogOpened: false
@@ -38,7 +39,9 @@ const converterReducer = (state = initialState, action) => {
     case SET_USD:
       return state.set('usd', action.value);
     case UPDATE_RATES:
-      return state.set('rates', fromJS({ ...action.rates, USD: 1 }));
+      return state
+        .set('rates', fromJS({ ...action.rates, USD: 1 }))
+        .set('loading', false);
     case UPDATE_FIELD_VALUE:
       return state.setIn([action.field, 'value'], action.value);
     case UPDATE_VALUE_FROM_INPUT:
@@ -50,7 +53,7 @@ const converterReducer = (state = initialState, action) => {
     case UPDATE_DIALOG_OPENED:
       return state.set('dialogOpened', action.opened);
     case CLEAR_STORE:
-      return state.setIn(['from', 'value'], '').setIn(['to', 'value'], '');
+      return initialState;
     default:
       return state;
   }

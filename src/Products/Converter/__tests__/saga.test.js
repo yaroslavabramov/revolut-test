@@ -13,7 +13,7 @@ import converterSaga, {
   startSubscription,
   fetchRates
 } from '../saga';
-import { getRates } from '../api';
+import { getRates } from '../../../utils/api';
 import { updateRates, updateFieldValue } from '../actions';
 
 describe('converter saga', () => {
@@ -124,9 +124,9 @@ describe('converter saga', () => {
   });
   describe('debouncedRecountValues saga', () => {
     const generator = debouncedRecountValues();
-    it('should delay for 500ms', () => {
+    it('should delay for 100ms', () => {
       const delayDescriptor = generator.next().value;
-      expect(delayDescriptor).toEqual(delay(500));
+      expect(delayDescriptor).toEqual(delay(100));
     });
     it('should call recountValues', () => {
       const delayDescriptor = generator.next().value;

@@ -7,9 +7,8 @@ const Wrapper = styled.div`
   padding: 16px;
 `;
 
-const ButtonsBlock = ({ handleExchangeClick }) => (
+const ButtonsBlock = () => (
   <Wrapper>
-    <WiredButton text="Add money" />
     <Link to="/converter">
       <WiredButton text="Exchange" />
     </Link>

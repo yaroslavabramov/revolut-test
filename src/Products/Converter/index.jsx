@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { selectDialogOpened } from './selectors';
+import { selectDialogOpened, selectLoading } from './selectors';
 import {
   subscribeRates,
   cancelSubscription,
@@ -25,7 +25,8 @@ const Converter = ({
   endSubscribe,
   handleDialogClick,
   clearInputs,
-  dialogOpened
+  dialogOpened,
+  loading
 }) => {
   /**
    * manage rates subscription
@@ -42,18 +43,24 @@ const Converter = ({
   }, []);
 
   return (
-    <main>
+    <>
       <Title text="Converter" />
-      <RateBlock />
-      <InputsBlock />
+      {!loading && (
+        <>
+          <RateBlock />
+          <InputsBlock />
+        </>
+      )}
+      {loading && 'Loading fresh rates...'}
       <ButtonsBlock handleExchangeClick={handleExchangeClick} />
       <ModalDialog opened={dialogOpened} handleClick={handleDialogClick} />
-    </main>
+    </>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  dialogOpened: selectDialogOpened
+  dialogOpened: selectDialogOpened,
+  loading: selectLoading
 });
 
 const mapDispatchToProps = dispatch => ({

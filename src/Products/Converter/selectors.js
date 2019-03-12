@@ -84,6 +84,11 @@ const selectDialogOpened = createSelector(
   substate => substate.get('dialogOpened')
 );
 
+const selectLoading = createSelector(
+  selectConverterDomain,
+  substate => substate.get('loading')
+);
+
 export {
   selectConverterDomain,
   selectRates,
@@ -96,5 +101,6 @@ export {
   selectToCurr,
   selectActiveField,
   selectIsValid,
-  selectDialogOpened
+  selectDialogOpened,
+  selectLoading
 };

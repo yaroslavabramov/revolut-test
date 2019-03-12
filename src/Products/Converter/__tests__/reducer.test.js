@@ -17,7 +17,9 @@ describe('converterReducer', () => {
       USD: 1,
       EUR: 2
     };
-    const expected = initialState.set('rates', fromJS(rates));
+    const expected = initialState
+      .set('rates', fromJS(rates))
+      .set('loading', false);
     expect(converterReducer(initialState, updateRates(rates))).toEqual(
       expected
     );

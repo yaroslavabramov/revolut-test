@@ -28,7 +28,7 @@ import {
   selectToValue,
   selectIsValid
 } from './selectors';
-import { getRates } from './api';
+import { getRates } from '../../utils/api';
 import { exchangeValues } from '../Pocket/actions';
 import { round } from '../../utils/math';
 
