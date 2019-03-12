@@ -1,10 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { Button } from '@material-ui/core';
+import { WiredButton } from 'react-wired';
+
+const Title = styled.h2`
+  && {
+    margin: 0;
+    padding: 24px;
+    font-weight: normal;
+    font-family: 'FallIsComing';
+  }
+`;
+const Text = styled(DialogText)`
+  && {
+    font-size: 26px;
+    font-family: 'FallIsComing';
+  }
+`;
 
 const ModalDialog = ({ opened, handleClick }) => (
   <div>
@@ -14,16 +29,14 @@ const ModalDialog = ({ opened, handleClick }) => (
       aria-labelledby="alert-dialog-slide-title"
       aria-describedby="alert-dialog-slide-description"
     >
-      <DialogTitle id="alert-dialog-slide-title">Sorry, bro</DialogTitle>
+      <Title id="alert-dialog-slide-title">Sorry, bro</Title>
       <DialogContent>
-        <DialogText id="alert-dialog-slide-description">
+        <Text id="alert-dialog-slide-description">
           You have not enough money
-        </DialogText>
+        </Text>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClick} color="primary">
-          okay :(
-        </Button>
+        <WiredButton onClick={handleClick} text="okay :(" />
       </DialogActions>
     </Dialog>
   </div>

@@ -1,1 +1,1 @@
-export const numbericRegexp = /^-?\d*\.?\d?\d?$/;
+export const numbericRegexp = /^\d*\.?\d?\d?$/;

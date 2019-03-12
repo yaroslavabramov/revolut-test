@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import history from './history';
-import './App.css';
 import Pocket from './Products/Pocket';
 import Converter from './Products/Converter';
 

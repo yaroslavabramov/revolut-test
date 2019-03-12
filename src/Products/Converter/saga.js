@@ -85,7 +85,7 @@ export function* recountValues() {
  * debouncer for recount values
  */
 export function* debouncedRecountValues() {
-  yield delay(500);
+  yield delay(0);
   yield call(recountValues);
 }
 /**
