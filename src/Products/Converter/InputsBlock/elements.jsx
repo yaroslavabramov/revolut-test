@@ -7,7 +7,7 @@ const Section = styled.section`
 
 const InputsRow = styled.div`
   display: flex;
-  margin-bottom: 8px;
+  margin: 16px 0 8px;
   justify-content: center;
 `;
 
