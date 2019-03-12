@@ -3,15 +3,28 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { selectRates } from './selectors';
-import { subscribeRates, cancelSubscription } from './actions';
+import { selectDialogOpened } from './selectors';
+import {
+  subscribeRates,
+  cancelSubscription,
+  exchangeClicked,
+  updateDialogOpened
+} from './actions';
 import ConvertFrom from './ConvertFrom';
 import ConvertTo from './ConvertTo';
+import ModalDialog from './ModalDialog';
+import { Button } from '@material-ui/core';
 
 /**
  * UI with converter
  */
-const Converter = ({ rates, startSubscribe, endSubscribe }) => {
+const Converter = ({
+  handleExchange,
+  startSubscribe,
+  endSubscribe,
+  handleDialogClick,
+  dialogOpened
+}) => {
   /**
    * manage rates subscription
    */
@@ -22,23 +35,23 @@ const Converter = ({ rates, startSubscribe, endSubscribe }) => {
 
   return (
     <div>
-      <Link to="/pocket">GO TO POCKET</Link>
-      Hello world! here is your rates:
-      <br />
-      {rates.USD}
-      <br />
-      {rates.EUR}
-      <br />
-      {rates.GBP}
-      <br />
       <ConvertFrom />
       <ConvertTo />
+      <Link to="/pocket">
+        <Button variant="contained" color="primary">
+          Back
+        </Button>
+      </Link>
+      <Button variant="contained" color="primary" onClick={handleExchange}>
+        exchange
+      </Button>
+      <ModalDialog opened={dialogOpened} handleClick={handleDialogClick} />
     </div>
   );
 };
 
 const mapStateToProps = createStructuredSelector({
-  rates: selectRates
+  dialogOpened: selectDialogOpened
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -47,6 +60,12 @@ const mapDispatchToProps = dispatch => ({
   },
   endSubscribe: () => {
     dispatch(cancelSubscription());
+  },
+  handleExchange: () => {
+    dispatch(exchangeClicked());
+  },
+  handleDialogClick: () => {
+    dispatch(updateDialogOpened(false));
   }
 });
 

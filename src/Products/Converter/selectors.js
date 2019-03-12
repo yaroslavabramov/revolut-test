@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
+import { selectPocket } from '../Pocket/selectors';
 
 /**
  * Direct selector to the converter state domain
@@ -72,6 +73,17 @@ const selectActiveField = createSelector(
   substate => substate.get('activeField')
 );
 
+const selectIsValid = createSelector(
+  selectPocket,
+  selectFrom,
+  (pocket, { value, currency }) => value < pocket[currency]
+);
+
+const selectDialogOpened = createSelector(
+  selectConverterDomain,
+  substate => substate.get('dialogOpened')
+);
+
 export {
   selectConverterDomain,
   selectRates,
@@ -82,5 +94,7 @@ export {
   selectTo,
   selectToValue,
   selectToCurr,
-  selectActiveField
+  selectActiveField,
+  selectIsValid,
+  selectDialogOpened
 };

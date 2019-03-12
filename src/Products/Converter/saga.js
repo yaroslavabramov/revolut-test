@@ -8,22 +8,29 @@ import {
   take,
   select
 } from 'redux-saga/effects';
+import history from '../../history';
 
 import {
   SUBSCRIBE_RATES,
   CANCEL_SUBSCRIPTION,
   UPDATE_FIELD_CURRENCY,
   UPDATE_VALUE_FROM_INPUT,
-  UPDATE_RATES
+  UPDATE_RATES,
+  EXCHANGE_CLICKED
 } from './constants';
-import { updateRates, updateFieldValue } from './actions';
+import { updateRates, updateFieldValue, updateDialogOpened } from './actions';
 import {
   selectActiveField,
   selectCoef,
+  selectFrom,
+  selectTo,
   selectFromValue,
-  selectToValue
+  selectToValue,
+  selectIsValid
 } from './selectors';
 import { getRates } from './api';
+import { exchangeValues } from '../Pocket/actions';
+import { round } from '../../utils/math';
 
 /**
  * fetch rates from backend
@@ -67,14 +74,10 @@ export function* recountValues() {
   let resultValue;
   if (activeField === 'from') {
     const valueFrom = yield select(selectFromValue);
-    resultValue = valueFrom
-      ? Math.round(valueFrom * coefficient * 100) / 100
-      : '';
+    resultValue = valueFrom ? round(valueFrom * coefficient) : '';
   } else {
     const valueTo = yield select(selectToValue);
-    resultValue = valueTo
-      ? Math.round((valueTo / coefficient) * 100) / 100
-      : '';
+    resultValue = valueTo ? round(valueTo / coefficient) : '';
   }
   yield put(updateFieldValue(changeField, resultValue.toString()));
 }
@@ -86,10 +89,25 @@ export function* debouncedRecountValues() {
   yield call(recountValues);
 }
 /**
+ * check validation and update pocket values
+ */
+export function* exchange() {
+  const isValid = yield select(selectIsValid);
+  if (isValid) {
+    const from = yield select(selectFrom);
+    const to = yield select(selectTo);
+    yield put(exchangeValues(from, to));
+    history.push('./pocket');
+  } else {
+    yield put(updateDialogOpened(true));
+  }
+}
+/**
  * converter UI listeners
  */
 export default function* converterSaga() {
   yield takeEvery(SUBSCRIBE_RATES, subscribeRates);
   yield takeEvery([UPDATE_FIELD_CURRENCY, UPDATE_RATES], recountValues);
   yield takeEvery(UPDATE_VALUE_FROM_INPUT, debouncedRecountValues);
+  yield takeEvery(EXCHANGE_CLICKED, exchange);
 }

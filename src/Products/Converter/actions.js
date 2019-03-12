@@ -4,7 +4,9 @@ import {
   CANCEL_SUBSCRIPTION,
   UPDATE_FIELD_VALUE,
   UPDATE_FIELD_CURRENCY,
-  UPDATE_VALUE_FROM_INPUT
+  UPDATE_VALUE_FROM_INPUT,
+  EXCHANGE_CLICKED,
+  UPDATE_DIALOG_OPENED
 } from './constants';
 
 /**
@@ -12,6 +14,10 @@ import {
  */
 const subscribeRates = () => ({
   type: SUBSCRIBE_RATES
+});
+
+const exchangeClicked = () => ({
+  type: EXCHANGE_CLICKED
 });
 
 const cancelSubscription = () => ({
@@ -52,12 +58,21 @@ const updateValueFromInput = (field, value) => ({
   field,
   value
 });
+/**
+ * update opened state for modal dialog
+ */
+const updateDialogOpened = opened => ({
+  type: UPDATE_DIALOG_OPENED,
+  opened
+});
 
 export {
   subscribeRates,
+  exchangeClicked,
   cancelSubscription,
   updateRates,
   updateFieldValue,
   updateFieldCurrency,
-  updateValueFromInput
+  updateValueFromInput,
+  updateDialogOpened
 };

@@ -10,7 +10,8 @@ import {
   UPDATE_RATES,
   UPDATE_FIELD_VALUE,
   UPDATE_FIELD_CURRENCY,
-  UPDATE_VALUE_FROM_INPUT
+  UPDATE_VALUE_FROM_INPUT,
+  UPDATE_DIALOG_OPENED
 } from './constants';
 
 export const initialState = fromJS({
@@ -27,7 +28,8 @@ export const initialState = fromJS({
     value: '',
     currency: 'GBP'
   },
-  activeField: 'to'
+  activeField: 'to',
+  dialogOpened: false
 });
 
 const converterReducer = (state = initialState, action) => {
@@ -44,6 +46,8 @@ const converterReducer = (state = initialState, action) => {
         .set('activeField', action.field);
     case UPDATE_FIELD_CURRENCY:
       return state.setIn([action.field, 'currency'], action.currency);
+    case UPDATE_DIALOG_OPENED:
+      return state.set('dialogOpened', action.opened);
     default:
       return state;
   }
