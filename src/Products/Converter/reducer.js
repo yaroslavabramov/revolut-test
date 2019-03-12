@@ -11,7 +11,8 @@ import {
   UPDATE_FIELD_VALUE,
   UPDATE_FIELD_CURRENCY,
   UPDATE_VALUE_FROM_INPUT,
-  UPDATE_DIALOG_OPENED
+  UPDATE_DIALOG_OPENED,
+  CLEAR_STORE
 } from './constants';
 
 export const initialState = fromJS({
@@ -48,6 +49,8 @@ const converterReducer = (state = initialState, action) => {
       return state.setIn([action.field, 'currency'], action.currency);
     case UPDATE_DIALOG_OPENED:
       return state.set('dialogOpened', action.opened);
+    case CLEAR_STORE:
+      return state.setIn(['from', 'value'], '').setIn(['to', 'value'], '');
     default:
       return state;
   }

@@ -9,6 +9,7 @@ export const UPDATE_FIELD_CURRENCY = 'products/Converter/UPDATE_FIELD_CURRENCY';
 export const UPDATE_VALUE_FROM_INPUT =
   'products/Converter/UPDATE_VALUE_FROM_INPUT';
 export const UPDATE_DIALOG_OPENED = 'products/Converter/UPDATE_DIALOG_OPENED';
+export const CLEAR_STORE = 'products/Converter/CLEAR_STORE';
 
 // other
 export const currencies = [

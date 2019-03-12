@@ -6,7 +6,8 @@ import {
   UPDATE_FIELD_CURRENCY,
   UPDATE_VALUE_FROM_INPUT,
   EXCHANGE_CLICKED,
-  UPDATE_DIALOG_OPENED
+  UPDATE_DIALOG_OPENED,
+  CLEAR_STORE
 } from './constants';
 
 /**
@@ -65,6 +66,12 @@ const updateDialogOpened = opened => ({
   type: UPDATE_DIALOG_OPENED,
   opened
 });
+/**
+ * clear data
+ */
+const clearStore = () => ({
+  type: CLEAR_STORE
+});
 
 export {
   subscribeRates,
@@ -74,5 +81,6 @@ export {
   updateFieldValue,
   updateFieldCurrency,
   updateValueFromInput,
-  updateDialogOpened
+  updateDialogOpened,
+  clearStore
 };
