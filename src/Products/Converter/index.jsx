@@ -13,6 +13,8 @@ import {
 import InputsBlock from './InputsBlock';
 import ModalDialog from './ModalDialog';
 import ButtonsBlock from './ButtonsBlock';
+import RateBlock from './RateBlock';
+import Title from '../../Components/Title';
 
 /**
  * UI with converter
@@ -40,11 +42,13 @@ const Converter = ({
   }, []);
 
   return (
-    <div>
+    <main>
+      <Title text="Converter" />
+      <RateBlock />
       <InputsBlock />
       <ButtonsBlock handleExchangeClick={handleExchangeClick} />
       <ModalDialog opened={dialogOpened} handleClick={handleDialogClick} />
-    </div>
+    </main>
   );
 };
 

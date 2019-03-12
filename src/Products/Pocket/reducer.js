@@ -9,9 +9,9 @@ import { UPDATE_FIELD, EXCHANGE_VALUES } from './constants';
 import { round } from '../../utils/math';
 
 export const initialState = fromJS({
-  USD: 12.4,
-  EUR: 14.4,
-  GBP: 4.7
+  USD: 100,
+  EUR: 100,
+  GBP: 100
 });
 
 const pocketReducer = (state = initialState, action) => {

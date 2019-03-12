@@ -7,11 +7,13 @@ const Section = styled.section`
 
 const InputsRow = styled.div`
   display: flex;
+  margin-bottom: 8px;
+  justify-content: center;
 `;
 
 const Selector = styled.div`
   && {
-    margin-right: 16px;
+    margin-right: 32px;
   }
 `;
 const Block = styled.div`

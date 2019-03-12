@@ -26,3 +26,9 @@ export const currencies = [
     label: 'GBP (£)'
   }
 ];
+
+export const currencySigns = {
+  USD: '$',
+  EUR: '€',
+  GBP: '£'
+};

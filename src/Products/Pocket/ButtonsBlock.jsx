@@ -9,10 +9,10 @@ const Wrapper = styled.div`
 
 const ButtonsBlock = ({ handleExchangeClick }) => (
   <Wrapper>
-    <Link to="/pocket">
-      <WiredButton text="Back" />
+    <WiredButton text="Add money" />
+    <Link to="/converter">
+      <WiredButton text="Exchange" />
     </Link>
-    <WiredButton text="Exchange" onClick={handleExchangeClick} />
   </Wrapper>
 );
 
