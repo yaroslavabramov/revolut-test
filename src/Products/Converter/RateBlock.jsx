@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
@@ -18,6 +19,12 @@ const RateBlock = ({ fromCurrency, toCurrency, rate }) => (
     }`}
   </Wrapper>
 );
+
+RateBlock.propTypes = {
+  fromCurrency: PropTypes.string.isRequired,
+  toCurrency: PropTypes.string.isRequired,
+  rates: PropTypes.object
+};
 
 const mapStateToProps = createStructuredSelector({
   fromCurrency: selectFromCurr,

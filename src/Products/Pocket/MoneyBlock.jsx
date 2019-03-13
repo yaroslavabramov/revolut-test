@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { createStructuredSelector } from 'reselect';
@@ -17,6 +18,17 @@ const MoneyBlock = ({ money: { USD, EUR, GBP } }) => (
     <div>GPB: {GBP}£</div>
   </Wrapper>
 );
+
+MoneyBlock.propTypes = {
+  /**
+   * object with values for each currency
+   */
+  money: PropTypes.shape({
+    USD: PropTypes.number.isRequired,
+    EUR: PropTypes.number.isRequired,
+    GBP: PropTypes.number.isRequired
+  }).isRequired
+};
 
 const mapStateToProps = createStructuredSelector({
   money: selectPocket
