@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import MoneyBlock from './MoneyBlock';
 import Title from '../../Components/Title';
 import ButtonsBlock from './ButtonsBlock';
@@ -16,4 +17,4 @@ const Pocket = () => {
   );
 };
 
-export default Pocket;
+export default connect()(Pocket);

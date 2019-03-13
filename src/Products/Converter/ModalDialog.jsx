@@ -23,17 +23,10 @@ const Text = styled(DialogText)`
 
 const ModalDialog = ({ opened, handleClick }) => (
   <div>
-    <Dialog
-      open={opened}
-      keepMounted
-      aria-labelledby="alert-dialog-slide-title"
-      aria-describedby="alert-dialog-slide-description"
-    >
-      <Title id="alert-dialog-slide-title">Sorry, bro</Title>
+    <Dialog open={opened}>
+      <Title>Sorry, bro</Title>
       <DialogContent>
-        <Text id="alert-dialog-slide-description">
-          You have not enough money
-        </Text>
+        <Text>You have not enough money</Text>
       </DialogContent>
       <DialogActions>
         <WiredButton onClick={handleClick} text="okay :(" />
