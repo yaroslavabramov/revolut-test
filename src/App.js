@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import history from './history';
+import Pocket from './Products/Pocket';
+import Converter from './Products/Converter';
 
+const Main = styled.main`
+  text-align: center;
+`;
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Main>
+        <Router history={history}>
+          <Switch>
+            <Route path="/converter" component={Converter} />
+            <Route path="/pocket" component={Pocket} />
+            <Redirect from="/" to="/pocket" />
+          </Switch>
+        </Router>
+      </Main>
     );
   }
 }
