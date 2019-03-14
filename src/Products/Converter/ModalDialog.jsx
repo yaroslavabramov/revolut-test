@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -22,17 +23,22 @@ const Text = styled(DialogText)`
 `;
 
 const ModalDialog = ({ opened, handleClick }) => (
-  <div>
-    <Dialog open={opened}>
-      <Title>Sorry, bro</Title>
-      <DialogContent>
-        <Text>You have not enough money</Text>
-      </DialogContent>
-      <DialogActions>
-        <WiredButton onClick={handleClick} text="okay :(" />
-      </DialogActions>
-    </Dialog>
-  </div>
+  <Dialog open={opened}>
+    <Title>Sorry, bro</Title>
+    <DialogContent>
+      <Text>You have not enough money</Text>
+    </DialogContent>
+    <DialogActions>
+      <WiredButton onClick={handleClick} text="okay :(" />
+    </DialogActions>
+  </Dialog>
 );
+
+ModalDialog.propTypes = {
+  /** true if dialog should be opened */
+  opened: PropTypes.bool.isRequired,
+  /** handler for button */
+  handleClick: PropTypes.func.isRequired
+};
 
 export default ModalDialog;

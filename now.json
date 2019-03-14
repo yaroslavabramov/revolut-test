@@ -1,3 +1,8 @@
 {
-  "alias": "revolut-test"
+  "version": 2,
+  "name": "revolut-test",
+  "builds": [
+      { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } }
+  ],
+  "alias": ["revolut-test.now.sh"]
 }

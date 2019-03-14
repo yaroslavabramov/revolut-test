@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -24,7 +25,7 @@ const Converter = ({
   startSubscribe,
   endSubscribe,
   handleDialogClick,
-  clearInputs,
+  clearData,
   dialogOpened,
   loading
 }) => {
@@ -39,7 +40,7 @@ const Converter = ({
    * clear data when unmount
    */
   useEffect(() => {
-    return clearInputs;
+    return clearData;
   }, []);
 
   return (
@@ -56,6 +57,23 @@ const Converter = ({
       <ModalDialog opened={dialogOpened} handleClick={handleDialogClick} />
     </>
   );
+};
+
+Converter.propTypes = {
+  /** handler for exchange button */
+  handleExchangeClick: PropTypes.func.isRequired,
+  /** start rate`s subscription  */
+  startSubscribe: PropTypes.func.isRequired,
+  /** end rate`s subscription */
+  endSubscribe: PropTypes.func.isRequired,
+  /** handler for dialog close button click */
+  handleDialogClick: PropTypes.func.isRequired,
+  /** clear data in store */
+  clearData: PropTypes.func.isRequired,
+  /** dialog opened state */
+  dialogOpened: PropTypes.bool.isRequired,
+  /** true if rates not loaded */
+  loading: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -76,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
   handleDialogClick: () => {
     dispatch(updateDialogOpened(false));
   },
-  clearInputs: () => {
+  clearData: () => {
     dispatch(clearStore());
   }
 });

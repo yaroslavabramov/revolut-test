@@ -21,11 +21,15 @@ const pocketReducer = (state = initialState, action) => {
     case EXCHANGE_VALUES: {
       const { currency: fromCurrency, value: fromDiff } = action.from;
       const { currency: toCurrency, value: toDiff } = action.to;
-      const fromValue = state.get(fromCurrency);
-      const toValue = state.get(toCurrency);
-      return state
-        .set(fromCurrency, round(fromValue - +fromDiff))
-        .set(toCurrency, round(toValue + +toDiff));
+      if (fromCurrency !== toCurrency) {
+        const fromValue = state.get(fromCurrency);
+        const toValue = state.get(toCurrency);
+        return state
+          .set(fromCurrency, round(fromValue - +fromDiff))
+          .set(toCurrency, round(toValue + +toDiff));
+      } else {
+        return state;
+      }
     }
     default:
       return state;
