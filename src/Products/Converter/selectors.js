@@ -63,7 +63,7 @@ const selectCoef = createSelector(
   selectFromCurr,
   selectToCurr,
   selectRates,
-  (from, to, rates) => +rates[from] / +rates[to]
+  (from, to, rates) => +rates[to] / +rates[from]
 );
 /**
  * select active field
@@ -76,7 +76,7 @@ const selectActiveField = createSelector(
 const selectIsValid = createSelector(
   selectPocket,
   selectFrom,
-  (pocket, { value, currency }) => value < pocket[currency]
+  (pocket, { value, currency }) => value <= pocket[currency]
 );
 
 const selectDialogOpened = createSelector(
