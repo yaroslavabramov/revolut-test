@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "src": "/pocket",
+      "dest": "index.html"
+    },
+    {
+      "src": "/converter",
+      "dest": "index.html"
+    }
+  ]
+}
