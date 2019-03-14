@@ -115,7 +115,7 @@ describe('selectors for main tab in case details', () => {
       USD: '1',
       EUR: '1.23'
     };
-    const expected = 1 / 1.23;
+    const expected = 1.23 / 1;
     const localState = fromJS({
       converter: {
         rates,
