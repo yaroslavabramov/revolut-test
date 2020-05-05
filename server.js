@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios')
 const path = require('path');
-var internetAvailable = require('internet-available');
+const internetAvailable = require('internet-available');
 
 const app = express();
 app.use(express.static(path.join(__dirname, 'build')));
@@ -22,7 +22,7 @@ const sendAnalyticsRequest = ({ query, userAgent }) => {
   return axios.post(
     'https://www.google-analytics.com/debug/collect',
     query,
-    {headers: { 'user-agent': userAgent }}
+    { headers: { 'user-agent': userAgent }}
   )
   .then(({ data }) => console.log(data))
   .catch(error => console.log(error));
@@ -50,3 +50,4 @@ app.get(/pocket|converter|/, (req, res) => {
 });
 
 app.listen(process.env.PORT || 8080);
+console.log('Here your link: http://localhost:8080/')

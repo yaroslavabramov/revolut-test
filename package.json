@@ -28,7 +28,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext=js,jsx",
-    "deploy": "yarn build; now --prod build"
+    "deploy": "yarn build; now --prod build",
+    "start-server": "yarn build; node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
