@@ -7,6 +7,10 @@
     {
       "src": "/converter",
       "dest": "index.html"
+    },
+    { "src": "/sw.js", 
+      "dest": "sw.js", 
+      "headers": { "cache-control": "no-cache" } 
     }
   ]
 }
