@@ -4,13 +4,14 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import Pocket from './Products/Pocket';
 import Converter from './Products/Converter';
+import { sendPageViewEvent } from './utils/analytics';
 
 const Main = styled.main`
   text-align: center;
 `;
 
 history.listen(location => {
-  window.gtag('config', 'UA-164609686-1', { page_path: location.pathname });
+  sendPageViewEvent(location.pathname);
 });
 
 class App extends Component {
