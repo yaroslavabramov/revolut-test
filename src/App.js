@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
+
 import history from './history';
 import Pocket from './Products/Pocket';
 import Converter from './Products/Converter';
+import { analytics } from './analytics';
 
 const Main = styled.main`
   text-align: center;
 `;
 
-history.listen(location => {
-  window.gtag('config', 'UA-164609686-1', { page_path: location.pathname });
+history.listen(() => {
+  analytics.page();
 });
 
 class App extends Component {

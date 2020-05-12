@@ -16,6 +16,7 @@ import ModalDialog from './ModalDialog';
 import ButtonsBlock from './ButtonsBlock';
 import RateBlock from './RateBlock';
 import Title from '../../Components/Title';
+import { analytics } from '../../analytics';
 
 /**
  * UI with converter
@@ -89,6 +90,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(cancelSubscription());
   },
   handleExchangeClick: () => {
+    analytics.track('exchangeButtonClick');
     dispatch(exchangeClicked());
   },
   handleDialogClick: () => {
@@ -99,7 +101,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Converter);
+export default connect(mapStateToProps, mapDispatchToProps)(Converter);
