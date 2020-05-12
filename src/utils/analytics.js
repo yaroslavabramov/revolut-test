@@ -10,3 +10,9 @@ export const analytics = Analytics({
     })
   ]
 });
+
+export const sendCustomEvent = ({ category, object, action }) =>
+  analytics.track(action, {
+    label: `${category} - ${object} - ${action}`,
+    category
+  });

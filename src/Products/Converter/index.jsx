@@ -16,7 +16,7 @@ import ModalDialog from './ModalDialog';
 import ButtonsBlock from './ButtonsBlock';
 import RateBlock from './RateBlock';
 import Title from '../../Components/Title';
-import { analytics } from '../../utils/analytics';
+import { sendCustomEvent } from '../../utils/analytics';
 
 /**
  * UI with converter
@@ -90,7 +90,11 @@ const mapDispatchToProps = dispatch => ({
     dispatch(cancelSubscription());
   },
   handleExchangeClick: () => {
-    analytics.track('exchangeButtonClick');
+    sendCustomEvent({
+      category: 'converter',
+      object: 'exchange button',
+      action: 'click'
+    });
     dispatch(exchangeClicked());
   },
   handleDialogClick: () => {
