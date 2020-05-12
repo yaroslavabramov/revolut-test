@@ -5,7 +5,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import history from './history';
 import Pocket from './Products/Pocket';
 import Converter from './Products/Converter';
-import { analytics } from './analytics';
+import { analytics } from './utils/analytics';
 
 const Main = styled.main`
   text-align: center;

@@ -16,7 +16,7 @@ import ModalDialog from './ModalDialog';
 import ButtonsBlock from './ButtonsBlock';
 import RateBlock from './RateBlock';
 import Title from '../../Components/Title';
-import { analytics } from '../../analytics';
+import { analytics } from '../../utils/analytics';
 
 /**
  * UI with converter
