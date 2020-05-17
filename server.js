@@ -12,17 +12,15 @@ const analyticsRequestsQueue = Promise.resolve()
 
 app.get('/analytics', (req, res) => {
   analyticsRequests.push({
-    userAgent: req.headers['user-agent'],
-    query: req._parsedOriginalUrl.query
+    query: `${req._parsedOriginalUrl.query}&ua=${req.headers['user-agent']}`
   });
   return res.send('ok');
  });
 
-const sendAnalyticsRequest = ({ query, userAgent }) => {
+const sendAnalyticsRequest = ({ query }) => {
   return axios.post(
     'https://www.google-analytics.com/debug/collect',
     query,
-    { headers: { 'user-agent': userAgent }}
   )
   .then(({ data }) => console.log(data))
   .catch(error => console.log(error));
