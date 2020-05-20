@@ -11,29 +11,33 @@ let analyticsRequests = [];
 const analyticsRequestsQueue = Promise.resolve()
 
 app.get('/analytics', (req, res) => {
-  analyticsRequests.push({
-    query: `${req._parsedOriginalUrl.query}&ua=${req.headers['user-agent']}`
-  });
+  analyticsRequests.push(`${req._parsedOriginalUrl.query}&ua=${req.headers['user-agent']}`);
   return res.send('ok');
  });
 
-const sendAnalyticsRequest = ({ query }) => {
+const sendAnalyticsRequest = (data) => {
   return axios.post(
-    'https://www.google-analytics.com/debug/collect',
-    query,
+    'https://www.google-analytics.com/batch',
+    data,
   )
   .then(({ data }) => console.log(data))
   .catch(error => console.log(error));
 } 
 
 const postAnalytics = () => {
-  analyticsRequests.forEach((reqData) => {
+  const chunksCount = Math.ceil(analyticsRequests.length / 10);
+  const chunksArray = [];
+
+  for (let i = 0; i < chunksCount; i++) {
+    const batchRequestContent = analyticsRequests.splice(0, 10).join(`\n`);
+    chunksArray.push(batchRequestContent);
+  }
+
+  chunksArray.forEach((reqData) => {
     analyticsRequestsQueue.then(() => {
       sendAnalyticsRequest(reqData)
     })
   })
-
-  analyticsRequests = []; 
 }
 
 setInterval(() => {
