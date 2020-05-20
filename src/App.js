@@ -8,6 +8,11 @@ import Converter from './Products/Converter';
 const Main = styled.main`
   text-align: center;
 `;
+
+history.listen(location => {
+  window.gtag('config', 'UA-164609686-1', { page_path: location.pathname });
+});
+
 class App extends Component {
   render() {
     return (
