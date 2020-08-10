@@ -33,7 +33,29 @@
 
       gtag('config', 'UA-164609686-1');
     </script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-app.js"></script>
 
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCWqBDTuD2SZie8oxIUATvaRl7BwXl-t1c",
+        authDomain: "offline-test-9a4ed.firebaseapp.com",
+        databaseURL: "https://offline-test-9a4ed.firebaseio.com",
+        projectId: "offline-test-9a4ed",
+        storageBucket: "offline-test-9a4ed.appspot.com",
+        messagingSenderId: "118728424882",
+        appId: "1:118728424882:web:c61d34ba77a978fd4638ab",
+        measurementId: "G-YT0C6CKP42"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

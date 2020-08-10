@@ -5,11 +5,15 @@ import history from './history';
 import Pocket from './Products/Pocket';
 import Converter from './Products/Converter';
 
+const analytics = window.firebase.analytics;
+
 const Main = styled.main`
   text-align: center;
 `;
 
 history.listen(location => {
+  analytics().setCurrentScreen(location.pathname);
+  analytics().logEvent('screen_view');
   window.gtag('config', 'UA-164609686-1', { page_path: location.pathname });
 });
 
