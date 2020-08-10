@@ -96,6 +96,12 @@ export function* exchange() {
   if (isValid) {
     const from = yield select(selectFrom);
     const to = yield select(selectTo);
+    const analytics = window.firebase.analytics;
+    analytics().logEvent('exchange', {
+      from_currency: from.currency,
+      to_currency: to.currency
+    });
+
     yield put(exchangeValues(from, to));
     history.push('./pocket');
   } else {
